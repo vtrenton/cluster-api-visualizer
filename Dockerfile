@@ -1,8 +1,5 @@
 # syntax=docker/dockerfile:1
 
-# Build
-ARG ARCH
-
 # Build the web app.
 FROM node:20 as web-builder
 
@@ -19,9 +16,9 @@ RUN npm run build
 # compared to Ubuntu
 FROM golang:1.22-alpine as builder
 
-# Need to redeclare ARCH to use in Go build stage
-ARG ARCH
 ARG ldflags
+ARG TARGETOS
+ARG TARGETARCH
 
 # Set working directory
 WORKDIR /app
@@ -38,10 +35,10 @@ COPY ./internal /app/internal
 COPY ./version /app/version
 COPY ./api /app/api
 
-RUN CGO_ENABLED=0 GOARCH=${ARCH} go build -trimpath -ldflags "${ldflags} -extldflags '-static'" -o main
+RUN CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} go build -trimpath -ldflags "${ldflags} -extldflags '-static'" -o main
 
 # Build production image
-FROM gcr.io/distroless/static:nonroot-${ARCH}
+FROM gcr.io/distroless/static:nonroot
 
 # Set working directory
 WORKDIR /app
