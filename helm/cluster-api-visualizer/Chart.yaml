@@ -4,5 +4,5 @@ description: A Helm Chart for installing the Cluster API Visualizer
 type: application
 sources:
   - https://github.com/k0rdent/cluster-api-visualizer
-appVersion: "1.4.0"
+appVersion: "1.4.1"
 version: 1.4.0
