@@ -3,7 +3,7 @@ replicas: 1
 image:
   repository: ghcr.io/k0rdent
   name: cluster-api-visualizer
-  imagePullPolicy: Never
+  imagePullPolicy: IfNotPresent
 
 label:
   key: app
