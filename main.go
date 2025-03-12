@@ -101,7 +101,7 @@ func main() {
 	var generateConfig bool
 
 	flag.StringVar(&host, "host", "localhost", "Host to listen on")
-	flag.IntVar(&port, "port", 8081, "The port to listen on")
+	flag.IntVar(&port, "port", 8085, "The port to listen on")
 	flag.BoolVar(&generateConfig, "generate-config", false, "Generate a kubeconfig file and write it to disk. Useful for running inside a pod within a cluster.")
 
 	klog.InitFlags(nil)
