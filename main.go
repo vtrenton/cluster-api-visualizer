@@ -147,7 +147,7 @@ func main() {
 	http.Handle("/api/v1/cluster-kubeconfig/", http.HandlerFunc(handleClusterKubeConfig))
 	http.Handle("/api/v1/version/", http.HandlerFunc(handleGetVersion))
 
-	var frontend fs.FS = os.DirFS("web/dist")
+	var frontend fs.FS = os.DirFS("web/build")
 	httpFS := http.FS(frontend)
 	fileServer := http.FileServer(httpFS)
 	serveIndex := serveFileContents(ctx, "index.html", httpFS)

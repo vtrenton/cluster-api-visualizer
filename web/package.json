@@ -1,69 +1,59 @@
 {
-  "name": "cluster-api-visualizer",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
   "dependencies": {
-    "@highlightjs/vue-plugin": "^1.0.2",
-    "@vue/composition-api": "^1.7.1",
-    "axios": "^0.24.0",
-    "core-js": "^3.6.5",
-    "d3": "^7.1.1",
-    "highlight.js": "^10.7.2",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.126",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "axios": "^1.8.2",
+    "d3": "^7.9.0",
+    "highlight.js": "^11.11.1",
     "js-yaml": "^4.1.0",
-    "less-loader": "7.3.0",
-    "pinia": "^2.0.28",
-    "pinia-plugin-persistedstate": "^3.0.2",
-    "roboto-fontface": "*",
-    "vnodes": "^1.1.9",
-    "vue": "2.6.14",
-    "vue-axios": "^3.4.0",
-    "vue-router": "^3.5.2",
-    "vue-virtual-scroller": "^1.1.2",
-    "vuetify": "^2.5.10"
+    "react": "^19.0.0",
+    "react-ace": "^14.0.1",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.30.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "zustand": "^5.0.3"
   },
-  "devDependencies": {
-    "@babel/core": "^7.22.10",
-    "@babel/eslint-parser": "^7.22.10",
-    "@mdi/font": "^7.0.96",
-    "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-service": "~5.0.8",
-    "eslint": "^8.57.1",
-    "eslint-plugin-vue": "^9.17.0",
-    "less": "^4.1.1",
-    "less-loader": "7.3.0",
-    "node-sass": "^9.0.0",
-    "sass": "~1.32.0",
-    "sass-loader": "^16.0.2",
-    "style-resources-loader": "^1.5.0",
-    "vue-cli-plugin-vuetify": "~2.4.3",
-    "vue-template-compiler": "2.6.14",
-    "vuetify-loader": "1.7.3"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {
-      "no-unused-vars": "off"
-    }
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3"
+  },
+  "proxy": "http://localhost:8080"
 }
