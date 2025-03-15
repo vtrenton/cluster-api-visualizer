@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import * as d3 from 'd3';
+import { useSettingsStore } from '../stores/settings';
 
 interface TreeConfig {
   nodeWidth: number;
@@ -62,6 +63,7 @@ const processTreeData = (data: TreeNode): TreeNode => {
 
 const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
   ({ treeConfig, treeData, treeIsReady, showLens, isStraight = false, onScale }, ref) => {
+    const { darkTheme } = useSettingsStore();
     const svgRef = useRef<SVGSVGElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const nodesContainerRef = useRef<HTMLDivElement>(null);
@@ -155,17 +157,20 @@ const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
       const linksGroup = svg.append('g')
         .attr('class', 'links');
       
+      // Determine link color based on theme
+      const linkColor = darkTheme ? '#aaaaaa' : '#cccccc';
+      
       links.forEach(link => {
         const linkPath = createLinkPath(link.source, link.target, isStraight);
         
         linksGroup.append('path')
           .attr('d', linkPath)
           .attr('fill', 'none')
-          .attr('stroke', '#ccc')
+          .attr('stroke', linkColor)
           .attr('stroke-width', '1.5px');
       });
       
-    }, [processedData, treeIsReady, treeConfig, isStraight, showLens]);
+    }, [processedData, treeIsReady, treeConfig, isStraight, showLens, darkTheme]);
     
     // Helper to create a path between two nodes
     const createLinkPath = (source: any, target: any, straight: boolean): string => {
@@ -271,6 +276,11 @@ const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
       const nodeData = node.data;
       const phaseColor = getPhaseColor(nodeData.phase, nodeData.ready);
       
+      // Determine text color based on theme
+      const textColor = darkTheme ? '#ffffff' : '#000000';
+      // Determine background color based on theme
+      const bgColor = darkTheme ? '#333333' : '#ffffff';
+      
       return (
         <div 
           key={nodeData._key}
@@ -281,11 +291,12 @@ const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
             width: treeConfig.nodeWidth,
             height: treeConfig.nodeHeight,
             transform: 'translate(-50%, -50%)',
-            backgroundColor: 'white',
-            border: '1px solid #ccc',
+            backgroundColor: bgColor,
+            color: textColor,
+            border: `1px solid ${darkTheme ? '#555555' : '#cccccc'}`,
             borderRadius: '5px',
             padding: '10px',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+            boxShadow: darkTheme ? '0 2px 5px rgba(0,0,0,0.3)' : '0 2px 5px rgba(0,0,0,0.1)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
