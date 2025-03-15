@@ -79,7 +79,7 @@ const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
         const width = containerRef.current.clientWidth;
         const height = containerRef.current.clientHeight;
         setTransformPosition({
-          x: width / 2 - treeConfig.nodeWidth / 2,
+          x: width / 2,
           y: 120 // Increased padding from the top to avoid the header
         });
       }
@@ -144,10 +144,13 @@ const ManagementClusterTree = forwardRef<any, ManagementClusterTreeProps>(
       // Ensure the root node and its immediate children are visible
       const minY = Math.min(...nodesList.map(n => n.y));
       const initialY = 120 + Math.abs(minY);
-      setTransformPosition(prev => ({
-        ...prev,
+      
+      // Center the tree horizontally based on the root node position
+      // We don't need to subtract half of nodeWidth because D3 already positions nodes at their center
+      setTransformPosition({
+        x: width / 2,
         y: initialY
-      }));
+      });
       
       // Clear previous content
       const svg = d3.select(svgRef.current);
