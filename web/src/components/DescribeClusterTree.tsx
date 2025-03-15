@@ -77,7 +77,7 @@ const DescribeClusterTree = forwardRef<any, DescribeClusterTreeProps>(
         const height = containerRef.current.clientHeight;
         setTransformPosition({
           x: width / 2 - treeConfig.nodeWidth / 2,
-          y: 50 // Some padding from the top
+          y: 120 // Increased padding from the top to avoid the header
         });
       }
     }, [treeConfig.nodeWidth]);
@@ -136,6 +136,15 @@ const DescribeClusterTree = forwardRef<any, DescribeClusterTreeProps>(
       // Set state with the nodes and links
       setNodes(nodesList);
       setLinks(linksList);
+      
+      // Calculate appropriate Y offset based on tree depth
+      // Ensure the root node and its immediate children are visible
+      const minY = Math.min(...nodesList.map(n => n.y));
+      const initialY = 120 + Math.abs(minY);
+      setTransformPosition(prev => ({
+        ...prev,
+        y: initialY
+      }));
       
       // Clear previous content
       const svg = d3.select(svgRef.current);
